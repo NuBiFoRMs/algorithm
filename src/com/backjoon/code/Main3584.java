@@ -39,6 +39,8 @@ public class Main3584 {
 			
 			makeDP(P);
 			
+			Util.print(P);
+			
 			st = new StringTokenizer(br.readLine());
 			int nodeA = Integer.parseInt(st.nextToken());
 			int nodeB = Integer.parseInt(st.nextToken());
