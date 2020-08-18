@@ -32,7 +32,6 @@ public class Main11266 {
 		
 		GRAPH = new ArrayList[V + 1];
 		ORDER = new int[V + 1];
-		COUNT = 0;
 		RESULT = new boolean[V + 1];
 		RESULT_COUNT = 0;
 		
@@ -51,7 +50,12 @@ public class Main11266 {
 		
 		//Util.print(GRAPH);
 		
-		getOrder(1, 0);
+		for (int i = 1; i <= V; i++) {
+			if (ORDER[i] == 0) {
+				COUNT = 0;
+				getOrder(i, 0);
+			}
+		}
 		
 		bw.write(RESULT_COUNT + "\n");
 		for (int i = 0; i < RESULT.length; i++) {
@@ -59,6 +63,7 @@ public class Main11266 {
 				bw.write(i + " ");
 			}
 		}
+		bw.write("\n");
 		
 		bw.flush();
 		
@@ -78,7 +83,7 @@ public class Main11266 {
 			if (ORDER[nextNode] == 0) {
 				childCount++;
 				int returnValue = getOrder(nextNode, node);
-				if (node != 1 && ORDER[node] <= returnValue && RESULT[node] == false) {
+				if (ORDER[node] != 1 && ORDER[node] <= returnValue && RESULT[node] == false) {
 					RESULT[node] = true;
 					RESULT_COUNT++;
 				}
@@ -89,12 +94,12 @@ public class Main11266 {
 			}
 		}
 		
-		if (node == 1 && childCount > 1) {
+		if (ORDER[node] == 1 && childCount > 1) {
 			RESULT[node] = true;
 			RESULT_COUNT++;
 		}
 		
-		//`System.out.printf("seek(%d, %d) = %d, %d\n", node, parent, ORDER[node], result);
+		//System.out.printf("seek(%d, %d) = %d, %d\n", node, parent, ORDER[node], result);
 		return result;
 	}
 	
